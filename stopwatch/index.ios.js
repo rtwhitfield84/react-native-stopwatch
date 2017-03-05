@@ -19,19 +19,19 @@ var Stopwatch = React.createClass({
   },
   render: function() {
     return <View style={styles.container}>
-    <View style={[styles.header, this.border('yellow')]}>
-    <View style={[styles.timeWrapper,this.border('red')]}>
-      <Text>
+    <View style={styles.header}>
+    <View style={styles.timeWrapper}>
+      <Text style={styles.timer}>
         {formatTime(this.state.timeElapsed)}
       </Text>
     </View>
-    <View style={[styles.buttonWrapper,this.border('green')]}>
+    <View style={styles.buttonWrapper}>
        {this.startStopButton()}
        {this.lapButton()}
     </View>
     </View>
 
-    <View style={[styles.footer, this.border('blue')]}>
+    <View style={styles.footer}>
       <Text>
         lap list
       </Text>
@@ -40,14 +40,15 @@ var Stopwatch = React.createClass({
   },
   startStopButton: function(){
     return <TouchableHighlight onPress = {this.handleStartPress} 
-    underlayColor="gray">
+    underlayColor="gray"
+    style={[styles.button, styles.startbutton]}>
         <Text>
           Start
         </Text>
       </TouchableHighlight> 
   },
   lapButton: function() {
-    return <View>
+    return <View style={styles.button}>
         <Text>
           Lap
         </Text>
@@ -62,13 +63,7 @@ var Stopwatch = React.createClass({
         timeElapsed: new Date() - startTime
       });
     }, 30);
-  },
-  border: function(color) {
-    return {
-      borderColor: color,
-      borderWidth: 4
-    }
-  } 
+  }
 });
 
 var styles = StyleSheet.create({
@@ -92,6 +87,20 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center'
+  },
+  timer: {
+    fontSize: 60
+  },
+  button: {
+    borderWidth: 2,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  startbutton: {
+    borderColor: '#00CC00'
   }
 });
 
